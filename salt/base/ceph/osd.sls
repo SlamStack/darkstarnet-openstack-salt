@@ -2,7 +2,7 @@
 
 {% set cluster = salt['grains.get']('environment','ceph') -%}
 {% set fsid = salt['pillar.get']('ceph:global:fsid') -%}
-{% set host = salt['config.get']('host') -%}
+{% set host = salt['config.get']('fqdn') -%}
 {% set bootstrap_osd_keyring = '/var/lib/ceph/bootstrap-osd/' + cluster + '.keyring' -%}
 {% set keyring = '/var/lib/ceph/bootstrap-osd/' + cluster + '.keyring' -%}
 
@@ -35,11 +35,11 @@ disk_prepare {{ dev }}:
     - name: ceph-disk prepare --cluster {{ cluster }} --cluster-uuid {{ fsid }} --fs-type xfs /dev/{{ dev }} /dev/{{ journal }}
     - unless: parted --script /dev/{{ dev }} print | grep 'ceph data'
 
-disk_activate {{ dev }}1:
+disk_activate {{ dev }}:
   cmd.run:
-    - name: ceph-disk activate /dev/{{ dev }}1
+    - name: ceph-disk activate /dev/{{ dev }}
     - onlyif: test -f {{ bootstrap_osd_keyring }}
-    - unless: ceph-disk list | egrep "/dev/{{ dev }}1.*active"
+    - unless: ceph-disk list | egrep "/dev/{{ dev }}.*active"
     - timeout: 10
 
 {% endif -%}

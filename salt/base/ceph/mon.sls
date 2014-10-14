@@ -2,7 +2,7 @@
 
 {% set cluster = salt['grains.get']('environment','ceph') -%}
 {% set fsid = salt['pillar.get']('ceph:global:fsid') -%}
-{% set host = salt['config.get']('host') -%}
+{% set host = salt['config.get']('fqdn') -%}
 {% set mon_interface = salt['pillar.get']('ceph:mon:interface') -%}
 {% set ip = salt['config.get']('ip_interfaces')[mon_interface][0] -%}
 {% set admin_keyring = '/etc/ceph/' + cluster + '.client.admin.keyring' -%}
