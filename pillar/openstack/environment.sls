@@ -9,7 +9,6 @@ nodes:
     devs:
       sdb:
         journal: sda2
-
   compute02.darkstarnet:
     roles:
       - ceph-osd
@@ -17,14 +16,13 @@ nodes:
     devs:
       sdb:
         journal: sda2
-
   compute03.darkstarnet:
     roles:
       - ceph-osd
       - ceph-mon
     devs:
       sdb:
-        journal: sda1
+        journal: sda2
 
 # Examples:
 # MON and OSD on separate nodes.
