@@ -12,7 +12,7 @@ ceph_repo:
     - require_in:
       - pkg: ceph
 
-{% else if salt['config.get']('oscodename') == 'trusty' -%}
+{% elif salt['config.get']('oscodename') == 'trusty' -%}
 
 ceph_repo:
   pkgrepo.managed:
