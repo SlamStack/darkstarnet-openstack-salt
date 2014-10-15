@@ -10,16 +10,21 @@ First you need Salt master and minions installed and running on all nodes and mi
 
 Networking should also be configured. There are custom networking templates for the darkstarnet lab in this repository that should work with little to no tweaking on other environments. This is currently not a formula due to the saltstack network module not working with bonds on Ubuntu 14 Trusty.
 
+After networking has been configured the journal and main ceph partitions need to be clean. It may be required to install ceph and ceph-disk zap these if the orchestration run fails.
+
 Outside of the afformentioned everything else aims to be a formula based on pillar data.
 
 Configuration options
 --------------
+
+NOTE: Currently there must be one and one only 'ceph-admin' role defined,typically on the first node in the environment listing. This node will become the admin node and the initial mon node for provisioning the others.
 
 Environment description file with examples is located here: pillar/openstack/environment.sls. Edit this file to match with your environment:
 
     nodes:
       ceph-node01:
         roles:
+          - ceph-admin
           - ceph-osd
           - ceph-mon
           - openstack-controller

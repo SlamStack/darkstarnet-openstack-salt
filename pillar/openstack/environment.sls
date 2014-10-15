@@ -1,7 +1,8 @@
 nodes:
   controller01.darkstarnet:
     roles:
-      - ceph-client
+      - ceph-admin
+      - ceph-mon
   compute01.darkstarnet:
     roles:
       - ceph-osd

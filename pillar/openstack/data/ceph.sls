@@ -1,6 +1,6 @@
 ceph:
   global:
-    fsid: 294bc494-81ba-4c3c-ac5d-af7b3442a2a5
+    fsid: 71e69067-b297-462c-af57-c4d4b1ae2782
     public_network: 192.168.100.0/24
     cluster_network: 10.20.0.0/24
   client:
@@ -17,5 +17,5 @@ ceph:
     filestore_split_multiple: 8
     op_threads: 8
   mon:
-    interface: bond0
+    interface: eth0
 

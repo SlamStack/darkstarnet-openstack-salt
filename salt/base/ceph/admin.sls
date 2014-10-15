@@ -31,17 +31,17 @@ cp.get_file {{mon}}{{ admin_keyring }}:
 
 {% endfor -%}
 
-get_mon_secret:
-  cmd.run:
-    - name: ceph auth get mon. -o {{ secret }}
-    - onlyif: test -f {{ admin_keyring }}
-    - unless: test -f {{ secret }}
+#get_mon_secret:
+#  cmd.run:
+#    - name: ceph auth get mon. -o {{ secret }}
+#    - onlyif: test -f {{ admin_keyring }}
+#    - unless: test -f {{ secret }}
 
-get_mon_map:
-  cmd.run:
-    - name: ceph mon getmap -o {{ monmap }}
-    - onlyif: test -f {{ admin_keyring }}
-    - unless: test -f {{ monmap }}
+#get_mon_map:
+#  cmd.run:
+#    - name: ceph mon getmap -o {{ monmap }}
+#    - onlyif: test -f {{ admin_keyring }}
+#    - unless: test -f {{ monmap }}
 
 gen_mon_secret:
   cmd.run:
