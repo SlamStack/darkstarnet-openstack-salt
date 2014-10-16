@@ -3,6 +3,7 @@ nodes:
     roles:
       - ceph-admin
       - ceph-mon
+      - mysql-server
   compute01.darkstarnet:
     roles:
       - ceph-osd
