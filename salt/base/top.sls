@@ -6,9 +6,14 @@ base:
     - ntp
     - common.mounts
 openstack:
-   '^(controller|compute)[0-9]*.darkstarnet$':
+   'roles:openstack-controller or roles:openstack-compute':
      - match: pcre
      - network
-   'controller01.darkstarnet':
+   'roles:openstack-controller':
+     - match: grain
      - mysql
      - mysql.client
+     - rabbitmq
+     - rabbitmq.network
+#     - rabbitmq.config
+

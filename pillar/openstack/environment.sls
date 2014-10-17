@@ -4,10 +4,12 @@ nodes:
       - ceph-admin
       - ceph-mon
       - mysql-server
+      - openstack-controller
   compute01.darkstarnet:
     roles:
       - ceph-osd
       - ceph-mon
+      - openstack-compute
     devs:
       sdb:
         journal: sda2
@@ -15,6 +17,7 @@ nodes:
     roles:
       - ceph-osd
       - ceph-mon
+      - openstack-compute
     devs:
       sdb:
         journal: sda2
@@ -22,6 +25,7 @@ nodes:
     roles:
       - ceph-osd
       - ceph-mon
+      - openstack-compute
     devs:
       sdb:
         journal: sda2

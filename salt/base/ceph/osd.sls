@@ -48,3 +48,11 @@ disk_activate {{ dev }}1:
 start ceph-osd-all:
   cmd.run:
     - onlyif: initctl list | grep "ceph-osd-all stop/waiting"
+
+{% for dir in salt['cmd.run']('ls -d /var/lib/ceph/osd/*').split('\n') %}
+{{ dir }}/sysvinit:
+  file.managed:
+    - mode: 755
+    - user: root
+    - group: root
+{% endfor %}

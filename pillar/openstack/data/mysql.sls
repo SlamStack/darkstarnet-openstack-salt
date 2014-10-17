@@ -5,11 +5,17 @@ mysql:
     user: mysql
     # my.cnf sections changes 
     mysqld:
-      bind-address: 0.0.0.0
+      bind-address: 10.10.0.2
       port: 3306
       log_bin: /var/log/mysql/mysql-bin.log
       auto_increment_increment: 5
       max_connect_errors: 4294967295
+      # openstack darkstarnet custom settings
+      default-storage-engine: innodb
+      collation-server: utf8_general_ci
+      character-set-server: utf8
+      innodb_file_per_table: 1
+      init-connect: SET NAMES utf8
     mysql:
       # my.cnf param that not require value
       no-auto-rehash: noarg_present

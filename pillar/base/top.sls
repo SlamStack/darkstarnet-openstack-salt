@@ -3,12 +3,14 @@
 openstack:
   '*':
     - data.mounts
-  '^(controller|compute)[0-9]*.darkstarnet$':
-    - match: pcre
     - environment
     - mine_functions
+  'roles:openstack-controller or roles:openstack-compute':
+    - match: grain
     - data.network
     - data.ceph
-  'controller01.darkstarnet':
+  'roles:openstack-controller':
+    - match: grain
     - data.mysql
+    - data.rabbitmq
 

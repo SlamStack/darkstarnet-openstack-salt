@@ -98,3 +98,10 @@ cp.push {{ bootstrap_osd_keyring }}:
     - path: {{ bootstrap_osd_keyring }}
     - watch:
       - cmd: osd_keyring_wait
+
+
+/var/lib/ceph/mon/{{ cluster }}-{{ host }}/sysvinit:
+  file.managed:
+    - mode: 755
+    - user: root
+    - group: root 
