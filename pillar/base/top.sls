@@ -13,4 +13,5 @@ openstack:
     - match: grain
     - data.mysql
     - data.rabbitmq
+    - data.openstack
 

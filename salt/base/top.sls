@@ -15,5 +15,4 @@ openstack:
      - mysql.client
      - rabbitmq
      - rabbitmq.network
-#     - rabbitmq.config
-
+     - keystone

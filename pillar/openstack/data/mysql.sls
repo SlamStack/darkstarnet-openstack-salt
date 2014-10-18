@@ -27,3 +27,14 @@ mysql:
     service: mysql-service
     config: /etc/mysql/my.cnf
     python: python-mysqldb
+
+  database:
+    - keystone
+
+  user:
+    - name: keystone
+      password: 'some way orange ball bliss'
+      host: localhost
+      databases:
+        - database: keystone
+          grants: ['all privileges']
