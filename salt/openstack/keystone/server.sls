@@ -4,6 +4,8 @@
   pkg.installed:
     - refresh: False
     - name: {{ keystone.pkg }}
+    - require:
+      - sls: mysql
   service.running:
     - name: {{ keystone.service }}
     - enable: True
