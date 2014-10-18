@@ -1,5 +1,5 @@
 rabbitmq:
-  erlang_cookie: MyCookier
+  erlang_cookie: kdsfdsfds-83459834qdfdfj
 
   plugins:
     - rabbitmq_management
@@ -7,11 +7,9 @@ rabbitmq:
 
   nodes:
     - controller01.darkstarnet
-  #   - rabbitmq2
-  #   - rabbitmq3
 
 #  cluster:
-#    node1: 10.10.0.2
+#    controller01.darkstarnet: 10.10.0.2
 #    node2: 127.0.0.2
 #    node3: 127.0.0.3
 

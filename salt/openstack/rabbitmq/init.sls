@@ -209,6 +209,7 @@ rabbitmq-server:
   rabbitmq_plugin:
     - enabled
     - name: "{{ name }}"
+    - runas: root
     - require:
       - pkg: rabbitmq-server
     - watch_in:
