@@ -30,11 +30,25 @@ mysql:
 
   database:
     - keystone
+    - glance
+    - nova
 
   user:
-    - name: keystone
-      password: 'some way orange ball bliss'
-      host: localhost
+    keystone:
+      password: 'somewayorangeballbliss'
+      host: '10.10.0.%'
       databases:
-        - database: keystone
+        keystone:
+          grants: ['all privileges']
+    glance:
+      password: 'twothreesixninerbathball'
+      host: '10.10.0.%'
+      databases:
+        glance:
+          grants: ['all privileges']
+    nova:
+      password: 'baseballonefordyellowtree'
+      host: '10.10.0.%'
+      databases:
+        nova:
           grants: ['all privileges']

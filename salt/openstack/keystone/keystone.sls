@@ -40,7 +40,7 @@ keystone_admin_user:
     - roles:
       - admin:
         - admin
-        - _member_
+#        - _member_
 
 keystone_keystone_service:
   keystone.service_present:

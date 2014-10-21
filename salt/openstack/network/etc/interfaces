@@ -1,12 +1,12 @@
 {% set host = salt['grains.get']('fqdn') -%}
 auto eth0
 iface eth0 inet static
-    address {{ salt['pillar.get']('nodes:' + host + ':eth0') }}
+    address {{ salt['pillar.get']('node_interfaces:' + host + ':eth0') }}
     netmask 255.255.255.0
 
 auto eth1
 iface eth1 inet static
-    address {{ salt['pillar.get']('nodes:' + host + ':eth1') }}
+    address {{ salt['pillar.get']('node_interfaces:' + host + ':eth1') }}
     netmask 255.255.255.0
     gateway 192.168.100.254
     dns-nameservers 192.168.1.1 
@@ -24,7 +24,7 @@ bond-master bond0
 
 auto bond0
 iface bond0 inet static
-address {{ salt['pillar.get']('nodes:' + host + ':bond0') }}
+address {{ salt['pillar.get']('node_interfaces:' + host + ':bond0') }}
 netmask 255.255.255.0
 # bond0 uses standard IEEE 802.3ad LACP bonding protocol
 bond-mode 4

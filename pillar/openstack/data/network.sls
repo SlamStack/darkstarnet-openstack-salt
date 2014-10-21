@@ -1,4 +1,4 @@
-nodes:
+node_interfaces:
   controller01.darkstarnet:
     eth0: 10.10.0.2
     eth1: 192.168.100.2

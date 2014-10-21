@@ -6,13 +6,19 @@ base:
     - ntp
     - common.mounts
 openstack:
-   'roles:openstack-controller or roles:openstack-compute':
-     - match: pcre
-     - network
-   'roles:openstack-controller':
-     - match: grain
-     - mysql
-     - mysql.client
-     - rabbitmq
-     - rabbitmq.network
-     - keystone
+  '*':
+    - network
+    - repos
+  'roles:openstack-controller':
+    - match: grain
+    - memcached
+    - mysql
+    - mysql.client
+    - rabbitmq
+    - keystone
+    - glance
+    - nova.controller
+  'roles:openstack-compute':
+    - match: grain
+    - nova.compute
+    - mysql.client

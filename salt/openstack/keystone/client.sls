@@ -4,3 +4,4 @@ keystone-client:
   pkg.installed:
     - refresh: False
     - name: {{ keystone.client_pkg }}
+    - skip_verify: True

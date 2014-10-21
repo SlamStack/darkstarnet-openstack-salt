@@ -1,4 +1,5 @@
 include:
+  - mysql
   - .openrc
   - .server
   - .client
