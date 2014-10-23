@@ -35,6 +35,19 @@ glance:
       debug: False
       verbose: False
 
+neutron:
+  public_ip: 192.168.100.2
+  internal_ip: 10.10.0.2
+  admin_ip: 10.10.0.2
+  keystone:
+    host: 10.10.0.2
+    password: 'pissgarbneutralfarthousetentpurple'
+    email: 'shane@darkstarnet.net'
+  rabbitmq:
+    name: openstack
+    password: "this tree rose strange rock"
+    ip: 10.10.0.2
+
 nova:
   public_ip: 192.168.100.2
   internal_ip: 10.10.0.2

@@ -18,7 +18,9 @@ openstack:
     - keystone
     - glance
     - nova.controller
+    - neutron
   'roles:openstack-compute':
     - match: grain
     - nova.compute
     - mysql.client
+    - neutron.client

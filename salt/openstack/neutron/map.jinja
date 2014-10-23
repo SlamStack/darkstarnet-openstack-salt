@@ -1,0 +1,68 @@
+{% set neutron=salt["grains.filter_by"]({
+  "Debian":{
+    "name": "neutron",
+    "pkg": ['neutron-server', 'neutron-plugin-ml2'],
+    "service": ['neutron-server'],
+    "client_pkg": "python-neutronclient",
+  },
+  "default": {
+    "name": "neutron",
+    "pkg": ['neutron-server', 'neutron-plugin-ml2'],
+    "service": ['neutron-server'],
+    "client_pkg": "python-neutronclient",
+  }
+  },merge=salt["pillar.get"]("neutron:lookup")) %}
+
+# Set the neutron-server default config
+{%- set neutron_config = {
+  "DEFAULT": {
+    "auth_strategy": "keystone",
+    "rpc_backend": "rabbit",
+    "rabbit_host": salt["pillar.get"]("neutron:rabbitmq:ip"),
+    "rabbit_userid": salt["pillar.get"]("neutron:rabbitmq:name"),
+    "rabbit_password": '"' + salt["pillar.get"]("neutron:rabbitmq:password") + '"',
+    "core_plugin": "ml2",
+    "service_plugins": "router",
+    "allow_overlapping_ips": "True",
+    "notify_nova_on_port_status_changes": "True",
+    "notify_nova_on_port_data_changes": "True",
+    "nova_url": "http://" + salt["pillar.get"]("nova:internal_ip", "127.0.0.1")  + ":8774/v2",
+    "nova_admin_auth_url": "http://" + salt["pillar.get"]("nova:internal_ip", "127.0.0.1") + ":35357/v2.0",
+    "nova_region_name": "regionOne",
+    "nova_admin_username": "nova",
+    "nova_admin_tenant_id": "service",
+    "nova_admin_password": salt["pillar.get"]("nova:keystone:password"), 
+  },
+  "keystone_authtoken": {
+    "auth_uri": "http://" + salt["pillar.get"]("keystone:internal_ip", "127.0.0.1") + ":5000/v2.0",
+    "identity_uri": "http://" + salt["pillar.get"]("keystone:internal_ip", "127.0.0.1") + ":35357",
+    "admin_tenant_name": "service",
+    "admin_user": "neutron",
+    "admin_password":  salt["pillar.get"]("neutron:keystone:password"),
+  },
+  "database": {
+    "connection": "mysql://neutron:" + salt["pillar.get"]("mysql:user:neutron:password") + "@" + salt["pillar.get"]("mysql:server:mysqld:bind-address","localhost") + "/neutron?charset=utf8",
+  },
+  "ml2": {
+    "type_drivers": "flat,gre",
+    "tenant_network_types": "gre",
+    "mechanism_drivers": "openvswitch",    
+  },
+  "securitygroup": {
+    "enable_security_group": "True",
+    "enable_ipset": "True",
+    "firewall_driver": "neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver",
+  }
+} %}
+
+{% if salt["pillar.get"]("neutron:config") %}
+  {% for section, value in salt["pillar.get"]("neutron:config").iteritems() %}
+    {% if not neutron_config.has_key(section) %}
+      {% do neutron_config.update({ section:{} }) %}
+    {% endif %}
+    {% do neutron_config[section].update(value) %}
+  {% endfor %}
+{% endif %}
+
+{#- vim:ft=sls
+-#}

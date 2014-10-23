@@ -32,6 +32,8 @@ mysql:
     - keystone
     - glance
     - nova
+    - neutron
+    - cinder
 
   user:
     keystone:
@@ -51,4 +53,16 @@ mysql:
       host: '10.10.0.%'
       databases:
         nova:
+          grants: ['all privileges']
+    neutron:
+      password: 'randomfartgrassshoespalms'
+      host: '10.10.0.%'
+      databases:
+        neutron:
+          grants: ['all privileges']
+    cinder:
+      password: 'blockturdeaglerockwhitenoise'
+      host: '10.10.0.%'
+      databases:
+        cinder:
           grants: ['all privileges']
