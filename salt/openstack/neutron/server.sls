@@ -8,7 +8,6 @@ include:
   pkg.installed:
     - refresh: False
     - pkgs: {{ neutron.pkg }}
-    - skip_verify: True
     - require:
       - sls: keystone.server
   service.running:

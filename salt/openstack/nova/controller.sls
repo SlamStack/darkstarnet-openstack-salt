@@ -12,7 +12,6 @@ nova:
     - pkgs: {{ nova.controller_pkgs }}
     - require_in:
       - file: /etc/nova/nova.conf
-    - skip_verify: True
     - require:
       - sls: keystone.server
   service.running:

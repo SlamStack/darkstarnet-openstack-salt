@@ -6,4 +6,3 @@ pkg-utils:
     - pkgs:
       - sysfsutils
       - {{ nova.conntrack }}
-    - skip_verify: True

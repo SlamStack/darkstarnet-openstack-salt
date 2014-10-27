@@ -7,7 +7,6 @@ include:
   pkg.installed:
     - refresh: False
     - pkgs: {{ glance.pkg }}
-    - skip_verify: True
     - require:
       - sls: keystone.server
   service.running:
@@ -18,6 +17,7 @@ include:
 {% for filename in ["glance-api.conf",
                     "glance-cache.conf",
                     "glance-registry.conf",
+                    "glance-api-paste.ini ",
                     "glance-scrubber.conf"] %}
 /etc/glance/{{ filename }}:
   file.managed:

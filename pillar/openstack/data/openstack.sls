@@ -66,6 +66,22 @@ nova:
     DEFAULT:
       novncproxy_base_ip: 192.168.100.2
 
+cinder:
+  public_ip: 192.168.100.2
+  internal_ip: 10.10.0.2
+  admin_ip: 10.10.0.2
+  keystone:
+    password: 'fartpoopplaceflyheartgreybeard'
+    email: shane@darkstarnet.net
+    host: 10.10.0.2
+  rabbitmq:
+    name: openstack
+    password: "this tree rose strange rock"
+    ip: 10.10.0.2
+  config:
+    DEFAULT:
+      debug: False
+
 memcached:
   deamonize: True
   verbose_level: 0

@@ -19,6 +19,7 @@ openstack:
     - glance
     - nova.controller
     - neutron
+    - cinder
   'roles:openstack-compute':
     - match: grain
     - nova.compute

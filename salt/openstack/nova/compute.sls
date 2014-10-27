@@ -10,7 +10,6 @@ nova-compute:
     - pkgs: {{ nova.compute_pkgs }}
     - require_in:
       - file: /etc/nova/nova.conf
-    - skip_verify: True
   service.running:
     - enable: True
     - restart: True

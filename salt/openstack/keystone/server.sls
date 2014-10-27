@@ -7,7 +7,6 @@ include:
 {{ keystone.name }}:
   pkg.installed:
     - name: {{ keystone.pkg }}
-    - skip_verify: True
     - require:
       - sls: mysql.database
 
