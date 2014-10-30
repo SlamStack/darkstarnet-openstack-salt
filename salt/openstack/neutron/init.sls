@@ -1,5 +1,5 @@
 include:
   - keystone
   - .keystone
-  - .server
-  - .client
+  - .controller
+  - .network

@@ -76,7 +76,6 @@
     "compute_driver": "libvirt.LibvirtDriver",
 
     "auth_strategy": "keystone",
-    "glance_host": salt["pillar.get"]("nova:glance:host"), 
 
     "rpc_backend": "nova.openstack.common.rpc.impl_kombu",
     "rabbit_userid": salt["pillar.get"]("nova:rabbitmq:name"),
@@ -107,6 +106,9 @@
     "linuxnet_interface_driver": "nova.network.linux_net.LinuxOVSInterfaceDriver",
     "firewall_driver": "nova.virt.firewall.NoopFirewallDriver",
 
+  },
+  "glance": {
+    "host": salt["pillar.get"]("glance:internal_ip"), 
   },
   "neutron": {
     "url": "http://" + salt["pillar.get"]("neutron:internal_ip", "127.0.0.1") + ":9696",

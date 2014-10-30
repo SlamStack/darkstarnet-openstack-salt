@@ -3,7 +3,11 @@
 {% if grains['os'] == 'Ubuntu' %}
 /etc/network/interfaces:
   file.managed:
-    - source: salt://network/etc/interfaces
+{% if host == 'controller01.darkstarnet' %}
+    - source: salt://network/etc/interfaces-controller
+{% else %}
+    - source: salt://network/etc/interfaces-compute
+{% endif %}
     - user: root
     - group: root
     - mode: 644

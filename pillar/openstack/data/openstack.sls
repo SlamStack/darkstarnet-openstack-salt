@@ -47,6 +47,7 @@ neutron:
     name: openstack
     password: "this tree rose strange rock"
     ip: 10.10.0.2
+  metadata_secret: hsdihr8089ty0d9fye08yf34890hfq308fh43489fh3948fh39hp93qh4fk%
 
 nova:
   public_ip: 192.168.100.2

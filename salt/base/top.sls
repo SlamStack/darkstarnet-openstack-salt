@@ -24,4 +24,5 @@ openstack:
     - match: grain
     - nova.compute
     - mysql.client
-    - neutron.client
+    - neutron.compute
+    - glance.client

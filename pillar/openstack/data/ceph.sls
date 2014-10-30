@@ -1,7 +1,7 @@
 ceph:
   global:
     fsid: 71e69067-b297-462c-af57-c4d4b1ae2782
-    public_network: 192.168.100.0/24
+    public_network: 10.10.0.0/24
     cluster_network: 10.20.0.0/24
   client:
     rbd_cache: true
