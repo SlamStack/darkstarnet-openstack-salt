@@ -22,5 +22,12 @@ networking:
 
 ifenslave:
   pkg.installed
+
+bridge-utils:
+  pkg.installed
+
+vlan:
+  pkg.installed
+
 {% endif %}
 

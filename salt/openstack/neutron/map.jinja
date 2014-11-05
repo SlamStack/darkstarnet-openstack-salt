@@ -1,4 +1,5 @@
 {% set host = salt['config.get']('fqdn') %}
+{% set my_id = salt['keystone.tenant_get'](name="service")['service'].id %}
 {% set neutron=salt["grains.filter_by"]({
   "Debian":{
     "name": "neutron",
@@ -43,6 +44,8 @@
   },
   },merge=salt["pillar.get"]("neutron:lookup")) %}
 
+
+
 # Set the neutron-server default config
 {%- set neutron_config = {
   "DEFAULT": {
@@ -61,15 +64,16 @@
     "nova_admin_auth_url": "http://" + salt["pillar.get"]("nova:internal_ip", "127.0.0.1") + ":35357/v2.0",
     "nova_region_name": "regionOne",
     "nova_admin_username": "nova",
-    "nova_admin_tenant_id": "service",
+    "nova_admin_tenant_id": my_id,
     "nova_admin_password": salt["pillar.get"]("nova:keystone:password"), 
   },
   "keystone_authtoken": {
-    "auth_uri": "http://" + salt["pillar.get"]("keystone:internal_ip", "127.0.0.1") + ":5000/v2.0",
-    "identity_uri": "http://" + salt["pillar.get"]("keystone:internal_ip", "127.0.0.1") + ":35357",
     "admin_tenant_name": "service",
     "admin_user": "neutron",
     "admin_password":  salt["pillar.get"]("neutron:keystone:password"),
+    "auth_host": salt["pillar.get"]("keystone:internal_ip", "127.0.0.1"),
+    "auth_port": "35357",
+    "auth_protocol": "http",
   },
   "database": {
     "connection": "mysql://neutron:" + salt["pillar.get"]("mysql:user:neutron:password") + "@" + salt["pillar.get"]("mysql:server:mysqld:bind-address","localhost") + "/neutron?charset=utf8",

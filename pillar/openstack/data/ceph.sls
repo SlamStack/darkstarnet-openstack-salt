@@ -9,9 +9,10 @@ ceph:
   osd:
     journal_size: 512
     pool_default_size: 3
+    crush_update_on_start: "true"
     pool_default_min_size: 1
-    pool_default_pg_num: 1024
-    pool_default_pgp_num: 1024
+    pool_default_pg_num: 128
+    pool_default_pgp_num: 128
     crush_chooseleaf_type: 1
     filestore_merge_threshold: 40
     filestore_split_multiple: 8

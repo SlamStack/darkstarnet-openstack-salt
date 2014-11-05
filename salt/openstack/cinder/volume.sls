@@ -1,6 +1,8 @@
 {%- from "cinder/map.jinja" import cinder with context %}
 
 include:
+  - keystone
+  - .keystone
   - .conf
 
 cinder-volume:
@@ -18,3 +20,4 @@ cinder-volume:
       - file: /etc/cinder/cinder.conf
     - watch:
       - file: /etc/cinder/cinder.conf
+

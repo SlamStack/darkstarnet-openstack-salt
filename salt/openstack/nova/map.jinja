@@ -115,7 +115,7 @@
     "auth_strategy": "keystone",
     "admin_auth_url": "http://" + salt["pillar.get"]("nova:internal_ip", "127.0.0.1") + ":35357/v2.0",
     "admin_tenant_name": "service",
-    "admin_user": "neutron",
+    "admin_username": "neutron",
     "admin_password":  salt["pillar.get"]("neutron:keystone:password"),
   },
   "database": {
@@ -131,12 +131,13 @@
     "live_migration_flag": "VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE",
   },
   "keystone_authtoken":{
-    "auth_host": salt["pillar.get"]("nova:keystone:host", "localhost"),
-    "auth_port": 5000,
+    "auth_host": salt["pillar.get"]("keystone:admin_ip", "localhost"),
+    "auth_port": "35357",
     "auth_protocol": "http",
     "admin_tenant_name": "service",
     "admin_user" : "nova",
-    "admin_password": salt["pillar.get"]("nova:keystone:password")
+    "admin_password": salt["pillar.get"]("nova:keystone:password"),
+    "signing_dirname": "/tmp/keystone-signing-nova",
   }
 } %}
 
