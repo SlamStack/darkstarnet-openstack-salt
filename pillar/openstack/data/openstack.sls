@@ -69,8 +69,8 @@ nova:
 
 cinder:
   public_ip: 192.168.100.2
-  internal_ip: 10.10.0.2
-  admin_ip: 10.10.0.2
+  internal_ip: 10.30.0.2
+  admin_ip: 10.30.0.2
   keystone:
     password: 'fartpoopplaceflyheartgreybeard'
     email: shane@darkstarnet.net

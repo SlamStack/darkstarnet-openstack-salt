@@ -16,6 +16,10 @@ nfs-common:
     - fstype: {{ salt['pillar.get'](host + ':mounts:' + dev + ':fstype') }}
     - mkmnt: True
     - opts:
+    {% if salt['pillar.get'](host + ':mounts:' + dev + ':fstype') == 'nfs' %}
+      - auto
+    {% else %}
       - defaults
+    {% endif %}
     - order: 100
 {% endfor %}

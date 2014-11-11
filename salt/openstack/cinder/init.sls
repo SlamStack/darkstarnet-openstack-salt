@@ -1,2 +1,3 @@
 include:
   - .server
+  - .volume

@@ -154,7 +154,7 @@
 {%- set metadata_agent_config = {
   "DEFAULT": {
     "auth_url": "http://" + salt["pillar.get"]("keystone:internal_ip", "127.0.0.1") + ":5000/v2.0",
-    "auth_region": "regionOne",
+    "auth_region": "RegionOne",
     "admin_tenant_name": "service",
     "admin_user": "neutron",
     "admin_password":  salt["pillar.get"]("neutron:keystone:password"),

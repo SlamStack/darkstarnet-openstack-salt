@@ -34,8 +34,10 @@
   }
   }, merge=salt["pillar.get"]("cinder:lookup")) %}
 
+# my_ip is a hack and should distinguish between a storage node and controller node in the future
 {%- set cinder_config = {
   "DEFAULT": {
+    "my_ip": salt["pillar.get"]("cinder:internal_ip", "localhost"),
     "rootwrap_config": "/etc/cinder/rootwrap.conf",
     "api_paste_confg": "/etc/cinder/api-paste.ini",
     "iscsi_helper": "tgtadm",
@@ -48,6 +50,7 @@
     "volumes_dir": "/var/lib/cinder/volumes",
 
     "rpc_backend": "cinder.openstack.common.rpc.impl_kombu",
+    "rabbit_host": salt["pillar.get"]("cinder:rabbitmq:ip"),
     "rabbit_userid": salt["pillar.get"]("cinder:rabbitmq:name"),
     "rabbit_password": '"' + salt["pillar.get"]("cinder:rabbitmq:password") + '"',
     "glance_host": salt["pillar.get"]("glance:internal_ip"),

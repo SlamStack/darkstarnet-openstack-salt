@@ -7,6 +7,7 @@
                         "nova-consoleauth",
                         "nova-novncproxy",
                         "nova-scheduler",
+                        "python-memcache",
                         "python-novaclient"],
     "controller_services": ["nova-api",
                             "nova-conductor",
@@ -18,20 +19,18 @@
                         "nova-conductor",
                         "nova-consoleauth",
                         "nova-novncproxy",
-                        "nova-network",
                         "nova-scheduler"],
     "all_in_one_services": ["nova-api",
                             "nova-compute",
                             "nova-conductor",
                             "nova-consoleauth",
-                            "nova-scheduler",
-                            "nova-network"],
-    "compute_pkgs": ["nova-network",
-                     "nova-api-metadata",
+                            "nova-scheduler"],
+    "compute_pkgs": ["nova-api-metadata",
                      "nova-compute",
                      "nova-compute-" + salt["pillar.get"]("nova:config:libvirt:virt_type", virt_type),
+                     "python-memcache"
                      ],
-    "compute_services": ["nova-network", "nova-compute"],
+    "compute_services": ["nova-compute"],
     "conntrack": "conntrack",
   },
   "RedHat": {
@@ -82,10 +81,11 @@
     "rabbit_password": salt["pillar.get"]("nova:rabbitmq:password"),
     "rabbit_host": salt["pillar.get"]("nova:rabbitmq:ip"),
 
+    "vnc_enabled": "True",
     "novncproxy_host": "0.0.0.0",
     "vncserver_listen": "0.0.0.0",
     "novncproxy_base_url": "http://" + salt["pillar.get"]("nova:config:DEFAULT:novncproxy_base_ip") + ":6080/vnc_auto.html",
-    "vncserver_proxyclient_address": salt["pillar.get"]("nova:internal_ip"),
+    "vncserver_proxyclient_address": salt["grains.get"]("ip_interfaces:eth0", salt["pillar.get"]("nova:internal_ip")),
 
     "network_manager": "nova.network.manager.VlanManager",
     "vlan_start": "1000",
@@ -105,6 +105,7 @@
     "security_group_api": "neutron",
     "linuxnet_interface_driver": "nova.network.linux_net.LinuxOVSInterfaceDriver",
     "firewall_driver": "nova.virt.firewall.NoopFirewallDriver",
+    "cinder_catalog_info": "volume:cinder:adminURL",
 
   },
   "glance": {
@@ -117,6 +118,8 @@
     "admin_tenant_name": "service",
     "admin_username": "neutron",
     "admin_password":  salt["pillar.get"]("neutron:keystone:password"),
+    "service_metadata_proxy": "True",
+    "metadata_proxy_shared_secret": salt["pillar.get"]("neutron:metadata_secret"),
   },
   "database": {
     "connection": ("mysql://nova:" + salt["pillar.get"]("mysql:user:nova:password") + "@"
@@ -128,7 +131,7 @@
     "snapshot_compression": "True",
     "use_virtio_for_bridges": "True",
     "snapshot_compression": "true",
-    "live_migration_flag": "VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE",
+    "#live_migration_flag": "VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE",
   },
   "keystone_authtoken":{
     "auth_host": salt["pillar.get"]("keystone:admin_ip", "localhost"),
