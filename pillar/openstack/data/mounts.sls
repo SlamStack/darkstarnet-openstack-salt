@@ -4,9 +4,10 @@ controller01.darkstarnet:
     /dev/sda2:
       target: /var/lib/mysql
       fstype: xfs
-    /dev/sdb1:
+    /images:
       target: /var/lib/glance/images
-      fstype: ext4
+      fstype: nfs
+      server: 10.30.0.100
 compute01.darkstarnet:
   mounts:
 #    /dev/sdb1:

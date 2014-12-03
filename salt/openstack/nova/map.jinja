@@ -28,6 +28,7 @@
     "compute_pkgs": ["nova-api-metadata",
                      "nova-compute",
                      "nova-compute-" + salt["pillar.get"]("nova:config:libvirt:virt_type", virt_type),
+                     "qemu-kvm",
                      "python-memcache"
                      ],
     "compute_services": ["nova-compute"],
@@ -50,6 +51,7 @@
                      "openstack-nova-network"],
     "compute_services": ["openstack-nova-compute",
                          "openstack-nova-network",
+                         "qemu-kvm",
                          "openstack-nova-metadata-api"],
                          
     "conntrack": "conntrack-tools",
@@ -90,6 +92,7 @@
     "network_manager": "nova.network.manager.VlanManager",
     "vlan_start": "1000",
     "vlan_interface": salt["pillar.get"]("nova:private_interface"),
+    "network_device_mtu": "9000",
     "multi_host": True,
     "send_arp_for_ha": True,
     "public_interface": salt["pillar.get"]("nova:public_interface"),
@@ -99,13 +102,15 @@
 
     "resume_guests_state_on_host_boot": "True",
     "snapshot_image_format": "qcow2",
-    "remove_unused_base_images": "True",
+    "remove_unused_base_images": "False",
 
     "network_api_class": "nova.network.neutronv2.api.API",
     "security_group_api": "neutron",
     "linuxnet_interface_driver": "nova.network.linux_net.LinuxOVSInterfaceDriver",
     "firewall_driver": "nova.virt.firewall.NoopFirewallDriver",
     "cinder_catalog_info": "volume:cinderv2:adminURL",
+
+    "dhcp_domain": "",
 
   },
   "glance": {

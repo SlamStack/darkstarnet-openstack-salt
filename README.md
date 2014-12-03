@@ -88,3 +88,8 @@ It will take few minutes to complete. Then you can check ceph cluster status fro
 
     salt 'ceph-node01' cmd.run 'ceph -s'
 
+TODO (Manually setup in the lab right now)
+===============
+1) Swift salt state
+2) Trove salt state
+3) LBaaS salt state

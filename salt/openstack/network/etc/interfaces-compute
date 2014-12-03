@@ -5,11 +5,13 @@ iface eth0 inet static
     netmask 255.255.255.0
     gateway 10.10.0.254
     dns-nameservers 192.168.1.1
+    mtu 9000
 
 auto eth1
 iface eth1 inet static
     address {{ salt['pillar.get']('node_interfaces:' + host + ':eth1') }}
     netmask 255.255.255.0
+    mtu 9000
 
 auto lo
 iface lo inet loopback
@@ -17,10 +19,12 @@ iface lo inet loopback
 auto eth2
 iface eth2 inet manual
 bond-master bond0
+mtu 9000
 
 auto eth3
 iface eth3 inet manual
 bond-master bond0
+mtu 9000
 
 auto bond0
 iface bond0 inet static
@@ -31,3 +35,4 @@ bond-mode 4
 bond-miimon 100
 bond-lacp-rate 1
 bond-slaves eth2 eth3
+mtu 9000
